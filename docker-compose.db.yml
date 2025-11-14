@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=TrueCodeDb
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_db_data:/var/lib/postgresql/data
+    networks:
+      - truecode
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d TrueCodeDb']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  db_migrator:
+    build:
+      context: .
+      dockerfile: TrueCode.DbMigrator/TrueCode.DbMigrator.Console/Dockerfile
+    container_name: app_migrator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ConnectionStrings__Default=${POSTGRES_CONNECTION}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - truecode
+    restart: no
+
+volumes:
+  postgres_db_data:
+
+networks:
+  truecode:
+    name: truecode

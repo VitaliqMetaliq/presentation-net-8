@@ -1,0 +1,102 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=TrueCodeDb
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_db_data:/var/lib/postgresql/data
+    networks:
+      - truecode
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d TrueCodeDb']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  db_migrator:
+    build:
+      context: .
+      dockerfile: TrueCode.DbMigrator/TrueCode.DbMigrator.Console/Dockerfile
+    container_name: app_migrator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ConnectionStrings__Default=${POSTGRES_CONNECTION}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - truecode
+    restart: no
+
+  background:
+    build:
+      context: .
+      dockerfile: TrueCode.BackgroundService/Dockerfile
+    container_name: background_service
+    ports:
+      - 7010:8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Default=${POSTGRES_CONNECTION}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - truecode
+
+  gateway:
+    build:
+      context: .
+      dockerfile: TrueCode.Gateway/Dockerfile
+    container_name: gateway
+    ports:
+      - 8080:8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - AuthSettings__Secret=${JWT_SECRET}
+    networks:
+      - truecode
+
+  finance:
+    build:
+      context: .
+      dockerfile: TrueCode.Finance/Dockerfile
+    container_name: finance_service
+    expose:
+      - 7030
+      - 8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ConnectionStrings__Default=${POSTGRES_CONNECTION}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - truecode
+
+  user:
+    build:
+      context: .
+      dockerfile: TrueCode.UserService/Dockerfile
+    container_name: user_service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Default=${POSTGRES_CONNECTION}
+      - AuthSettings__Secret=${JWT_SECRET}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - truecode
+
+volumes:
+  postgres_db_data:
+
+networks:
+  truecode:
