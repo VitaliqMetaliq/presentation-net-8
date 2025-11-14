@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "FavoritesProto";
+
+package favorites;
+
+message GetUserFavoriteCurrenciesRequest {
+  
+}
+
+message GetUserFavoriteCurrenciesReply {
+  repeated string currencies = 1;
+}
+
+service Favorites {
+  rpc GetUserFavoriteCurrencies (GetUserFavoriteCurrenciesRequest) returns (GetUserFavoriteCurrenciesReply);
+}
