@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCode.UserService.WebApi", "TrueCode.UserService.WebApi\TrueCode.UserService.WebApi.csproj", "{2038985E-E333-41F5-8C25-333B66F5C38F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCode.UserService.Infrastructure", "TrueCode.UserService.Infrastructure\TrueCode.UserService.Infrastructure.csproj", "{AD43143C-0DF4-41B4-8496-0A4079BC00D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCode.Shared.Infrastructure", "..\TrueCode.Shared.Infrastructure\TrueCode.Shared.Infrastructure.csproj", "{438EED4D-C113-8A41-34C8-1563FFD9DE5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCode.UserService.Application", "TrueCode.UserService.Application\TrueCode.UserService.Application.csproj", "{4541E233-95A0-42EA-910E-4CD82BDAFF2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCode.Shared.Contracts", "..\TrueCode.Shared.Contracts\TrueCode.Shared.Contracts.csproj", "{AD760810-2FB9-96DF-04D6-FBFCE64DBF1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCode.UserService.Tests", "TrueCode.UserService.Tests\TrueCode.UserService.Tests.csproj", "{EF92E844-6BF8-4A47-A100-9FB1F6E118DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2038985E-E333-41F5-8C25-333B66F5C38F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2038985E-E333-41F5-8C25-333B66F5C38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2038985E-E333-41F5-8C25-333B66F5C38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2038985E-E333-41F5-8C25-333B66F5C38F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD43143C-0DF4-41B4-8496-0A4079BC00D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD43143C-0DF4-41B4-8496-0A4079BC00D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD43143C-0DF4-41B4-8496-0A4079BC00D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD43143C-0DF4-41B4-8496-0A4079BC00D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{438EED4D-C113-8A41-34C8-1563FFD9DE5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{438EED4D-C113-8A41-34C8-1563FFD9DE5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{438EED4D-C113-8A41-34C8-1563FFD9DE5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{438EED4D-C113-8A41-34C8-1563FFD9DE5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4541E233-95A0-42EA-910E-4CD82BDAFF2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4541E233-95A0-42EA-910E-4CD82BDAFF2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4541E233-95A0-42EA-910E-4CD82BDAFF2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4541E233-95A0-42EA-910E-4CD82BDAFF2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD760810-2FB9-96DF-04D6-FBFCE64DBF1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD760810-2FB9-96DF-04D6-FBFCE64DBF1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD760810-2FB9-96DF-04D6-FBFCE64DBF1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD760810-2FB9-96DF-04D6-FBFCE64DBF1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF92E844-6BF8-4A47-A100-9FB1F6E118DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF92E844-6BF8-4A47-A100-9FB1F6E118DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF92E844-6BF8-4A47-A100-9FB1F6E118DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF92E844-6BF8-4A47-A100-9FB1F6E118DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FFAB172B-0769-4F84-99DD-281E321233A8}
+	EndGlobalSection
+EndGlobal
