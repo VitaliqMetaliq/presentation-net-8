@@ -20,6 +20,7 @@ namespace TrueCode.Finance.Infrastructure.Repositories
             return await _dbContext.FavoriteCurrencies
                 .Where(e => e.UserId == userId)
                 .Select(e => e.Currency)
+                .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
 
@@ -28,6 +29,7 @@ namespace TrueCode.Finance.Infrastructure.Repositories
         {
             return await _dbContext.FavoriteCurrencies.Where(e => e.UserId == userId)
                 .Select(e => e.CurrencyId)
+                .AsNoTracking()
                 .ToHashSetAsync(cancellationToken);
         }
 
@@ -36,6 +38,17 @@ namespace TrueCode.Finance.Infrastructure.Repositories
         {
             await _dbContext.FavoriteCurrencies.AddRangeAsync(favorites, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<HashSet<string>> GetExistingCurrencyIdsAsync(
+            IReadOnlyCollection<string> currencyIds,
+            CancellationToken cancellationToken = default)
+        {
+            return await _dbContext.Currencies
+                .Where(c => currencyIds.Contains(c.Id))
+                .Select(c => c.Id)
+                .AsNoTracking()
+                .ToHashSetAsync(cancellationToken);
         }
     }
 }

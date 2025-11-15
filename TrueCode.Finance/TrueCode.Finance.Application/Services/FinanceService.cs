@@ -43,17 +43,19 @@ namespace TrueCode.Finance.Application.Services
 
         public async Task AddFavoritesAsync(Guid userId, IReadOnlyCollection<string> currencies, CancellationToken cancellationToken = default)
         {
-            if (currencies.Count == 0) return;
-
             try
             {
-                var existing = await _repository.GetUserFavoriteCurrencyIdsAsync(userId, cancellationToken);
+                var existingIds = await _repository.GetExistingCurrencyIdsAsync(currencies, cancellationToken);
+                if (existingIds.Count == 0) return;
 
-                var newFavorites = currencies.Where(e => !existing.Contains(e))
-                    .Select(e => new FavoriteCurrencyEntity
+                var userFavorites = await _repository.GetUserFavoriteCurrencyIdsAsync(userId, cancellationToken);
+
+                var newFavorites = existingIds
+                    .Except(userFavorites)
+                    .Select(id => new FavoriteCurrencyEntity
                     {
                         UserId = userId,
-                        CurrencyId = e
+                        CurrencyId = id
                     });
 
                 if (newFavorites.Any())

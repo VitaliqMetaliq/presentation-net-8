@@ -72,7 +72,7 @@ services:
       - 7030
       - 8080
     environment:
-      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__Default=${POSTGRES_CONNECTION}
     depends_on:
       postgres:
